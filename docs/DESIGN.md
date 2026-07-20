@@ -76,6 +76,54 @@ Our goal: a clean, addictive, *continuously satisfying* cozy sorting loop, where
 - **Data-driven library tree**: configurable branching per tier supports varied shapes (e.g. 2–3 wings × 8–9 floors, or 10 wings × 2 floors), including a **1-wing / 1-floor starter** with several aisles & cabinets.
 - **Seeded, grammar-based generator** (word lists + templates, no AI, pure JS, deterministic) produces **name + hue + glyph together per wing** (mnemonic and aligned, e.g. Alchemy → teal → alembic), plus set titles and volume numbers. Reproducible from a seed; offline; asset-free.
 
+### Skills & upgrades — two governing principles
+These two rules keep every skill *assist-not-replace* by construction and keep the world cozy at rest:
+- **Reveal counts and states, never positions.** Skills may tell you *whether*, *how many*, and *what state* — never *which book, where*. The seek (identifying and locating the specific book) always stays the player's. The single deliberate exception is the **Hot/Cold** rescue skill, which is heavily cooldown-gated precisely because it crosses this line.
+- **Permanent fixtures always show state; transient surfaces are skill-gated.** Shelves and Aisle/Floor/Wing **plaques are always-on** — they are the progress/reward layer (the gold zone visibly growing, the watch-it-clean payoff). Skills surface the action-planning layer on the **messy transient stuff** — tables, foreign books, match counts, empty surfaces — and those overlays are time-boxed so the map never becomes a HUD.
+
+### Progression & quest economy
+All progression is minted **only by playing the loop** — both currencies come from the two state transitions, so there is no way to advance except by sorting. This is what keeps the player *in* the loop.
+
+**Two-axis reward split** (maps onto the two satisfaction axes; keeps a reward stream always flowing):
+
+| Axis | Fires on | Grants | Feel |
+|---|---|---|---|
+| **Present** (containment, *fast/coarse*) | coarse thresholds — books merely *into* a region | **reveals & unlocks**: next area opens, a new skill appears (free at base tier), **charges** drip | the world keeps *expanding*; novelty arrives early |
+| **Complete** (order, *slow*) | a container fully in order | **premium currency** (tier-weighted) + a **one-shot scroll** | the deep, climactic *payoff* for finishing |
+
+- **Why Present drives reveals/unlocks (not Complete):** Complete is the slow, back-loaded tail; gating new territory behind it would violate **"never gate progress on 100%."** Present is fast, so the **next area reveals while you're still ordering the current one** — there's always a freshly-lit frontier edge beckoning. Area/library unlocks trigger on Present thresholds.
+- **Two currencies:**
+  - **Charges** (drip, from Present milestones) → consumable skills (Assemble, Hot/Cold, Sharpen). Rise only as fast as you contain, so you can't out-spell the work.
+  - **Premium** (chunky, from Complete) → permanent upgrades & **skill-tier** purchases. **Tier-weighted geometrically** (illustrative: Cabinet 1 · Aisle 5 · Floor 25 · Wing 100) so bigger completions dominate and cascades feel huge.
+- **Skill acquisition:** a Present threshold **reveals a skill free at base tier** (immediate new toy = the pull); **premium currency buys its tier upgrades** and cart-size upgrades. Spending is a **quick inline radial, never a shop menu** (menus pull players *out* of the loop); the buyable list *grows* as you complete bigger containers — completion depth paces *what's available*, premium spend chooses *order*.
+
+**The forward-pull engine ("one more table"):**
+1. **Completion cascades** — because of monotonicity + Present-before-Complete, completions chain: an aisle's last cabinet tips the aisle, maybe the floor, maybe the wing. **The last book of a region is the single most rewarding action in the game** — one small act detonates every parent bar it completes, plus currency + a scroll. Chasing that detonation *is* the addiction.
+2. **Zeigarnik magnetism** — always-on plaques make a near-full bar hard to walk away from; the economy makes near-full the most lucrative to close.
+3. **Reveal-the-next** — Present unlocks the next area (and often a new skill) *before* the current region is fully ordered, so finishing one loop literally hands you new territory **and** a new tool to go try.
+
+**One-shot completion scrolls** (Complete loot, alongside premium currency):
+- Each completion drops a **one-shot scroll**, drawn **at random from that tier's pool** (the "what did I get?" adds to the detonation). Held as **non-decaying inventory** — no timer, no fail-state pressure.
+- Effects are **tier-scaled** and would be OP if repeatable — but they're not. Example pools:
+
+  | Complete a… | Example scroll pool (one-shot) |
+  |---|---|
+  | **Cabinet** | *Recall (table)* — pull all matching books on the current table to cart · refill charges |
+  | **Aisle** | *Grand Assemble* — close out one near-Present set free · *Reveal* — flash all match-counts on this floor briefly |
+  | **Floor** | *Recall (floor)* — pull all matching non-shelved books on this floor to cart, up to cart size · *Overfill* — next cart load carries double |
+  | **Wing** | *Recall (library)* — pull all matching non-shelved books library-wide to cart, up to cart size |
+
+- **Why this stays assist-not-replace even at wing scale:** a scroll's supply is gated behind exactly the work it would replace — you only mint a wing-scroll by completing a wing (already sorted by hand), so scrolls can't be hoarded into a stealth-autopilot; the shortcut only mints *after* the long way. And every Recall only does the **collect** step for **one filter, up to cart size** — you still haul, dump, and shelve.
+
+**Quests = emergent frontier spotlights** (not an authored quest log — that would be content to write and would fight the emergent frontier):
+- The **container hierarchy *is* the quest system.** The game spotlights the **nearest almost-done container** as the current soft-goal, previews its cascade reward, and auto-promotes the next one on completion. Fully procedural/asset-free; it *is* the depth-first expanding frontier turned into guidance.
+- Optional light nudges (e.g. "finish any Cabinet in the Alchemy wing") can steer breadth-vs-depth — kept minimal.
+
+**Macro progression & the difficulty curve:**
+- **Within a library:** enough **Present** on a floor/wing unlocks the next — spatial gating that matches depth-first expansion.
+- **Across libraries (levels):** completing a library unlocks the next — a fresh seed/theme where **the seek gets subtler** (finer distinguishing features = the fair-band difficulty ramp).
+- **Assist-not-replace *as* the difficulty curve:** each new library raises seek subtlety; the skills unlocked in the previous one are exactly what restore fairness. New library raises the challenge, prior skill answers it.
+
 ---
 
 ## 2. Designs That Need a Little More Polish
@@ -91,13 +139,76 @@ Our goal: a clean, addictive, *continuously satisfying* cozy sorting loop, where
 - **Visual-encoding specifics.** Exact treatment per tier (Floor = shade vs texture; Cabinet = accent vs mark), how many distinct hues/glyphs a library can use before legibility suffers, and readability tuning at table density. Direction is set; specifics need craft + playtesting.
 - **Table-space slack.** Keep tables generous (start 1/4 full, some clear) — settled in direction; exact slack TBD. Open sub-question: is table scarcity ever a *feature* (light logistics puzzle) or always kept generous?
 
+### Skill / upgrade roster (direction settled; tiers, gating & numbers TBD)
+Every entry obeys the two governing principles above. Grouped by the loop friction it relieves.
+
+**Always available from the start (base kit, not skills):**
+- **Cart + click-collect** (single-filter) and **walk** — the core verbs.
+- **Binary table-clear indicator** — while zoomed into a table, a "clear for this filter" mark appears once zero matches remain. Boolean only: no count, no location. Kills early-game "did I get them all?" uncertainty without handing out counts. The Match-counter skill *escalates* this same signal.
+- **Shelves & container plaques always show state** (Invalid → Present → Complete + fill bars). Per the fixtures principle.
+
+**Movement / haul**
+- **Sprint** — at-will, short cooldown. Speed + cooldown are Phase-4 knobs.
+- **Cart-size upgrades** — capacity N → 1.5N → 2N (illustrative). Fewer trips per table cleared = feels more powerful; every seek/haul/dump still happens, just amortized. This is the main power-growth spine. Sizes & increments are Phase-4 knobs.
+
+**Seek — readability aids only, never auto-tag**
+- **Insight / "Sharpen"** — brief, costed pulse that amplifies the active tier's cover encoding (matching code glows harder, rest dims harder) when the distinguishing feature is subtle. Temporary + amplify-only — you still read and click each cover.
+- **Hot/Cold vignette** *(the one deliberate "positions" exception; long cooldown)* — on activation, locks to the **available book nearest the cursor** and gives a warm/cool vignette as the cursor moves toward/away from it; **clears on pickup** (a second book needs a second cast). **Grayed out when the table has no matches** so a long cooldown is never wasted (this reveals only ≥1-match presence — same info the binary indicator already gives). Framed as a **rescue valve** for a fair-band seek a player's eyes bounce off of, never the primary seek. Duration + cooldown are Phase-4 knobs.
+
+**"Am I done / what's left?" — counts & states, never positions**
+- **Match-counter** — escalates the base binary indicator:
+  - **T1:** exact count of remaining matches while zoomed.
+  - **T2:** count on **overworld hover** over a table (route-planning triage).
+  - **T3:** counts **persist in the current room** without hovering. *(Past T3 = diminishing returns / clutter.)*
+
+**Haul destination — "find an open table to dump on"**
+- **Arrow-to-open-table** — player-activated; the arrow **clears on arrival** to keep the screen calm.
+  - **T1:** nearest empty table, period.
+  - **T2:** nearest empty table **in the cart filter's home region** (dump carries books *nearer home*); alt-color fallback when none is ideally located.
+  - **T3:** weighs emptiness *and* home-proximity, and prefers routing you to **consolidate onto a partially-sorted table already trending toward the same target** (the table-pulse mechanic paying off).
+
+**Cleanup frontier — which tables still hold wrong books**
+- **Foreign-book table highlight** — activated skill that tints **tables** by foreign-book presence (transient layer); container cleanliness is shown permanently by shelves/plaques. Tiered **visibility timeout + cooldown**, both Phase-4 knobs.
+
+**Closeout / long tail**
+- **Assemble** — on a fully-Present-but-not-Complete set, spend a charge to close it out hunt-free. Agency without obligation.
+- **Auto-Shelving** — background mop that files trickle-in stragglers into **already-Complete** containers only. Monotonic; never touches unsorted piles.
+
+**Cost-lane model** (self-balancing: power rises only as fast as you actually sort)
+| Lane | Earned by | Powers |
+|---|---|---|
+| **At-will** (cooldown only) | free | Sprint, Sharpen, Hot/Cold (long cd), Arrow, Foreign-highlight |
+| **Charges** | **Present** milestones | Assemble, other skip-tedium bursts |
+| **Premium upgrades** | **Complete** rewards | Cart size, Auto-Shelving speed, Match-counter/Arrow tiers, +charge capacity |
+
+**Provisional start → gated progression** *(final gating belongs to the still-open progression/quest economy):*
+| Tier | Skills |
+|---|---|
+| **From start** | cart + click-collect · binary table-clear indicator (zoomed) · shelves & plaques always show state · walk |
+| **Early** | Sprint · Cart size +1 · Match-counter T1 |
+| **Mid** | Arrow-to-open-table · Foreign-book highlight · Match-counter T2 |
+| **Later** | Hot/Cold vignette · higher tiers of the above |
+
+### Phase-4 balance parameters (running list — tune in Testing & Tuning)
+Captured as we design so nothing is lost before Phase 4:
+- **Cart:** base capacity N; upgrade sizes & increments.
+- **Sprint:** speed multiplier; cooldown.
+- **Hot/Cold:** effect duration; cooldown (long enough to stay a rescue valve, not so long it frustrates).
+- **Foreign-highlight:** visibility timeout; cooldown (per tier).
+- **Arrow-to-open-table:** any per-tier timing/range.
+- **Match-counter:** none timing-wise (passive); interacts with table capacity N.
+- **Progression currencies:** charges granted per Present milestone; premium granted per Complete; the **geometric tier weights** (Cabinet/Aisle/Floor/Wing).
+- **Reveal thresholds:** which Present % (and at which tier) reveals the next area / next skill; which unlocks the next library.
+- **Skill costs:** premium price of each skill-tier upgrade and cart-size upgrade.
+- **Scroll pools & rates:** contents of each tier's scroll pool and the random-draw weights; scroll magnitudes (e.g. Recall scope/caps).
+
 ---
 
 ## 3. Open Questions (not yet answered)
 
-- **Spells / upgrades economy.** Full roster (beyond Insight, Assemble, Auto-Shelving, and movement: jump/sprint/carry), their **cost model** (mana / charges / cooldown), and — critically — **which new-area difficulty each spell answers**, verifying every one stays *assist-not-replace*.
-- **Progression / quest economy.** Confirmed that **state transitions drive progression** (Present → charges/unlocks; Complete → premium rewards). Still open: the actual quest structure, unlock gating, any currency, how new **areas and whole new libraries (levels)** unlock, and how quests softly guide the frontier.
-- **Seek-difficulty tuning & placement** ("keep exploring"). Partly answered by table-size↔tier correlation, but the explicit difficulty curve — where **unaided** seek lives vs where **spell-aided** seek takes over — is unresolved.
+- **Spells / upgrades economy.** *(Roster + cost-lane model now drafted — see §2 "Skill / upgrade roster.")* Remaining: lock **tiers, numbers, and start→gated ordering**, which are entangled with the progression/quest economy (below) and Phase-4 balancing.
+- **Progression / quest economy.** *(Now designed — see §1 "Progression & quest economy.")* Remaining is **numbers only** (currency rates, tier weights, reveal thresholds, skill costs, scroll pools) — all captured in the Phase-4 balance list.
+- **Seek-difficulty tuning & placement** ("keep exploring"). *Direction now set:* each new **library** raises seek subtlety and the previously-unlocked skill restores fairness (§1 difficulty curve). Remaining is the explicit per-library subtlety curve — a Phase-4 tuning task.
 - **MVP / first vertical slice.** What the first playable is (likely the 1-wing/1-floor starter library running the full table→cart→shelf loop with one or two spells).
 - **Win condition / session shape.** Escape-the-library goal vs endless/zen vs level progression through libraries; whether any optional scoring or timers exist (baseline: no fail state).
 - **Persistence.** Save/resume (localStorage?), and whether a library is shareable by seed.
@@ -107,4 +218,4 @@ Our goal: a clean, addictive, *continuously satisfying* cozy sorting loop, where
 
 ---
 
-*Status: living design doc. Core experience (loop, spatial model, state machine, interaction, art pipeline, generation, initial distribution) is settled; **spells and the progression/quest economy** are the next systems to lock, then the technical plan. Capacity numbers are parked.*
+*Status: living design doc. Core experience (loop, spatial model, state machine, interaction, art pipeline, generation, initial distribution), the **skill/upgrade roster + cost-lane model** (§2), and the **progression/quest economy** (§1) are now all settled in design. What remains for Phase 1 is closing the smaller open questions (MVP slice, win condition/session shape, cart-filter UI) and the **🚪 Gate Review**; everything numeric is parked in the Phase-4 balance list. Next system-level work is the **technical plan (Phase 2)**.*
