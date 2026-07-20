@@ -19,15 +19,17 @@ phase) as well as forward.
 ✅ Done · 🟡 In progress · ⬜ Not started · 🅿️ Parked · ❓ Open question
 
 ## Where we are right now
-**Phase 1 (Game Design), ~70%.** The core experience is settled. Remaining design work is
-the **spell roster** and the **progression / quest economy**, plus a few tuning numbers.
-**No code yet.**
+**Phase 1 (Game Design), ~90%.** The core experience, the **skill/upgrade roster + cost-lane
+model** (DESIGN.md §2), and the **progression / quest economy** (DESIGN.md §1) are all settled.
+Remaining Phase-1 work is the smaller open questions (MVP slice, win condition/session shape,
+cart-filter UI) and the **🚪 Gate Review**. All numeric tuning is parked in the Phase-4 balance
+list. **No code yet.**
 
 ## Phase overview
 | # | Phase | Status |
 |---|-------|--------|
 | 0 | Concept & Requirements | ✅ Done |
-| 1 | Game Design | 🟡 ~70% |
+| 1 | Game Design | 🟡 ~90% |
 | 2 | Technical Design / Architecture | ⬜ Not started |
 | 3 | Implementation | ⬜ Not started |
 | 4 | Testing & Tuning | ⬜ Not started |
@@ -58,9 +60,9 @@ the **spell roster** and the **progression / quest economy**, plus a few tuning 
 - ✅ No autopilot endgame (cut)
 
 **Remaining design:**
-- ⬜ Spell / upgrade roster + cost model (verify each stays assist-not-replace)
-- ⬜ Progression / quest economy (state transitions → unlocks; area & library progression)
-- ❓ Seek-difficulty curve (where unaided seek lives vs spell-aided)
+- ✅ Spell / upgrade roster + cost model (drafted; each verified assist-not-replace via two governing principles — DESIGN.md §2). Tiers/numbers/gating deferred to progression economy + Phase 4.
+- ✅ Progression / quest economy (two-axis Present→reveals/charges, Complete→premium+scrolls; emergent frontier spotlights; area→library gating — DESIGN.md §1). Numbers deferred to Phase 4.
+- ✅ Seek-difficulty curve — direction set: each new **library** raises subtlety, prior skill restores fairness (DESIGN.md §1). Per-library curve is a Phase-4 tuning task.
 - ❓ Win condition / session shape (escape vs endless vs level progression)
 - ❓ Cart filter-setting UI (how the player picks Wing/Floor/Aisle/Cabinet/Set)
 - 🟡 Visual-encoding specifics (per-tier treatments; legibility tuning)
@@ -101,6 +103,7 @@ _Build milestones (draft):_
 ---
 
 ## Immediate next actions
-1. Lock the **spell / upgrade roster** and its cost model.
-2. Design the **progression / quest economy** on top of the state machine.
-3. Then enter **Phase 2** (data model / architecture) and define the **MVP slice**.
+1. ✅ ~~Lock the **spell / upgrade roster** and its cost model.~~ (DESIGN.md §2)
+2. ✅ ~~Design the **progression / quest economy**.~~ (DESIGN.md §1)
+3. Close the remaining Phase-1 open questions: **MVP / first vertical slice**, **win condition / session shape**, **cart-filter UI**.
+4. Run the **🚪 Phase-1 Gate Review**, then enter **Phase 2** (data model / architecture).
